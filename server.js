@@ -26,15 +26,21 @@ if(process.env.NODE_ENV === 'production'){
     //Set static folder
     app.us(express.static('client/build'));
 
+    app.get('/', function(req, res){
+      res.redirect('/todo');
+   });
+
     app.get('*', (req,res) => {
         res.sendFile(path.resolve(__dirname,'client', 'build', 'index.html'));
     });
 
 }
 
-const port = process.env.port||5000;
+app.listen(function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+})
 
 //require('./api/items')(app, {});
-app.listen(port, () => console.log('Server started at ' + port));
-console.log('test')
+//app.listen(port, () => console.log('Server started at ' ));
+//console.log('test')
 

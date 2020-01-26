@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Item Model
-const Item = require('../../models/Item');
+const Item = require('../../models/item.js');
 
 //@route POST api/items
 //@desc create a post
@@ -22,10 +22,10 @@ router.delete('/:id', (req,res) => {
     .then(item => item.remove().then(() => res.json({success: true})))   
     .catch(err => res.status(404).json({success: false}));     
 });
-//@route create api/items
-//@desc create a post
+//@route get api/items
+//@desc get a post
 // @access Public
-router.get('/', (req,res) => {
+router.get('/api/items', (req,res) => {
     Item.find()
     .sort({ date: -1 })
     .then(items => res.json(items))
